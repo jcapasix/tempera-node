@@ -7,6 +7,8 @@ var Users = require('./controllers/users.js');
 var User = require('./models/user.js');
 
 
+var Cultivos = require('./controllers/cultivos.js');
+
 // 2. Authentication Middleware
 function ensureAuthenticated(req, res, next) {
 
@@ -37,10 +39,17 @@ module.exports = function (app) {
   // 4. Authentication Routes
   app.post('/api/auth/login', Auth.login);
   app.post('/api/auth/signup', Auth.signup);
+
   // 5. Application Routes
   app.post('/api/users', ensureAuthenticated, Users.list);
   app.get('/api/people/page/:page', ensureAuthenticated, Users.list);
   app.get('/api/people/:id', ensureAuthenticated, Users.show);
   app.post('/api/profile', ensureAuthenticated, Users.profile);
+
+  //Cultivos
+  app.post('/api/cultivos', Cultivos.list);
+  app.post('/api/cultivos/delete', Cultivos.delete)
+  app.post('/api/cultivos/update', Cultivos.update)
+  app.post('/api/cultivo', Cultivos.save)
 
 };

@@ -12,13 +12,15 @@ exports.login = function(req, res){
     if(err) throw err;
 
     if (!user) {
-      res.json({success: false, message:'Autenticación Fallida. El usuario no existe.'});
+      const error = {title: "Autenticación Fallida", detail:"El usuario no existe."}
+      res.json({success: false, error:error});
     }
 
     else if (user){
       console.log(user)
       if (user.password != req.body.password) {
-        res.json({ success: false, message: 'Autenticación Fallida. Contraseña incorrecta.'});
+        const error = {title: "Autenticación Fallida", detail:"Contraseña incorrecta."}
+        res.json({success: false, error:error});
       } else {
         const token = jwt.sign({user}, config.TOKEN_SECRET);
         const newUser = {"_id":user._id, "username":user.username, "token": token}
@@ -39,9 +41,10 @@ exports.signup = function(req, res){
 
     }
     if(user){
+      const error = {title: "Registro Fallido", detail:"El Usuario ya se encuentra registrado."}
       return res.status(200).send({
           success: false,
-          message: 'El Usuario ya se encuentra registrado'
+          error: error
           });
     }
     else{
@@ -54,9 +57,10 @@ exports.signup = function(req, res){
             console.log("user save")
 
             if(err){
+              const error = {title: "Registro Fallido", detail:"Error al crear el Usuario."}
               return res.status(404).send({
                 success: false,
-                message: 'Error al crear el Usuario'
+                error: error
               });
             };
 
