@@ -36,20 +36,18 @@ function ensureAuthenticated(req, res, next) {
 
 // 3. Routes
 module.exports = function (app) {
+
+  //app.post('/api/users', ensureAuthenticated, Users.list);
   // 4. Authentication Routes
   app.post('/api/auth/login', Auth.login);
   app.post('/api/auth/signup', Auth.signup);
-
-  // 5. Application Routes
-  app.post('/api/users', ensureAuthenticated, Users.list);
-  app.get('/api/people/page/:page', ensureAuthenticated, Users.list);
-  app.get('/api/people/:id', ensureAuthenticated, Users.show);
-  app.post('/api/profile', ensureAuthenticated, Users.profile);
 
   //Cultivos
   app.post('/api/cultivos', Cultivos.list);
   app.post('/api/cultivos/delete', Cultivos.delete)
   app.post('/api/cultivos/update', Cultivos.update)
   app.post('/api/cultivo', Cultivos.save)
+  app.post('/api/cultivo/active', Cultivos.cultivoActive)
+  app.post('/api/cultivos/active', Cultivos.active)
 
 };

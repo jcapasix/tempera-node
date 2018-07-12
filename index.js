@@ -4,7 +4,13 @@ var bodyParser = require('body-parser');
 var mongoose = require("mongoose");
 var cors = require("cors");
 var logger = require('morgan');
+const http = require('http');
 const jwt = require('jsonwebtoken');
+
+
+const socketio = require('socket.io');
+const server = http.createServer(express);
+const io = socketio.listen(server);
 
 
 // 2. Include Configuration

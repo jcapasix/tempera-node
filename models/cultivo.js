@@ -8,6 +8,7 @@ const Cultivo = new Schema({
   temperaturaMin: {type:Number, required: 'Temperatura Invalid'},
   fechaInicial: {type:Date, required: 'Date Invalid'},
   fechaFinal: {type:Date, required: 'Date Invalid'},
+  active: {type:Boolean, default: false },
 });
 
 Cultivo.plugin(mongoosePaginate);

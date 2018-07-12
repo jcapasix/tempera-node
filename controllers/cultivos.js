@@ -64,3 +64,30 @@ exports.delete = function(req, res) {
     }
   });
 };
+
+
+exports.active = function(req, res) {
+  console.log(req.body)
+  Cultivo.updateMany({}, { active: false }, function() {
+    Cultivo.findByIdAndUpdate(req.body.id, { $set: {active: true}}, { new: true }, function (err, cultivo) {
+      if (err) {
+        console.log(err);
+        res.json({"success":false, "error": "Error al activar el cultivo."});
+      }
+      res.json({"success":true, "message": "El cultivo se activó correctamente."});
+    });
+  });
+};
+
+exports.cultivoActive = function(req, res) {
+  console.log(req.body)
+  Cultivo.findOne({active: true}, function (err, cultivo) {
+      if (err) {
+        console.log(err);
+        res.json({"success":false, "error": "Error al activar el cultivo."});
+      }
+      res.json({"success":true, "cultivo": cultivo});
+    });
+};
+
+
