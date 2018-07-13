@@ -45,3 +45,30 @@ require('./routes')(app);
 app.listen(config.LISTEN_PORT, function(){
     console.log('listening on port ' + config.LISTEN_PORT);
 });
+
+//SERIAL COMUNICATION
+const SerialPort = require('serialport');
+const ReadLine = SerialPort.parsers.Readline;
+
+const port = new SerialPort("COM4", {
+    baudRate: 9600
+  });
+
+  const parser = port.pipe(new ReadLine({ delimiter: '\r\n' }));
+
+  parser.on('open', function () {
+    console.log('connection is opened');
+  });
+
+  parser.on('data', function (data) {   
+    let temp=parseInt(data, 10) + " C°";
+    console.log(temp);   
+    io.emit('Temperatura',data)
+  });
+
+  parser.on('error', function (err) {   
+    console.log(err);   
+  });
+  port.on('error', function (err) {   
+    console.log(err);   
+  });
