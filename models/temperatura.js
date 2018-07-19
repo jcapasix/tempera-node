@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 const mongoosePaginate = require('mongoose-paginate');
 
 const Temperatura = new Schema({
-  value: {type:String, required: 'Temperatura Invalid'},
-});
+  value: {type:Number, required: 'Temperatura Invalid'},
+}, {timestamps: true});
 
 Temperatura.plugin(mongoosePaginate);
 

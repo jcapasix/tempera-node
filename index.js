@@ -41,10 +41,20 @@ mongoose.Promise = global.Promise;
 // 6. Load app routes
 require('./routes')(app);
 
+var Temperatura = require('./models/temperatura.js');
+
+
 // 7. Start the server
 app.listen(config.LISTEN_PORT, function(){
-    console.log('listening on port ' + config.LISTEN_PORT);
+	console.log('listening on port ' + config.LISTEN_PORT);
+
 });
+
+function saveTemperatura(tempJson){
+	var temperatura = new Temperatura(tempJson.temperatura);
+	temperatura.save();
+}
+
 
 //SERIAL COMUNICATION
 const SerialPort = require('serialport');
@@ -61,9 +71,10 @@ const port = new SerialPort("COM4", {
   });
 
   parser.on('data', function (data) {   
-    let temp=parseInt(data, 10) + " C°";
-    console.log(temp);   
-    io.emit('Temperatura',data)
+    //let temp=parseInt(data, 10) + " C°";
+    console.log(temp);
+    var tempJson = {"temperatura":{"value":30}};
+	saveTemperatura(tempJson);
   });
 
   parser.on('error', function (err) {   

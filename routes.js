@@ -6,6 +6,7 @@ var Auth = require('./controllers/auth.js');
 var Users = require('./controllers/users.js');
 var User = require('./models/user.js');
 
+var Temperatura = require('./controllers/temperatura.js');
 
 var Cultivos = require('./controllers/cultivos.js');
 
@@ -49,5 +50,11 @@ module.exports = function (app) {
   app.post('/api/cultivo', Cultivos.save)
   app.post('/api/cultivo/active', Cultivos.cultivoActive)
   app.post('/api/cultivos/active', Cultivos.active)
+
+
+  app.post('/api/temp', Temperatura.temp)
+  app.post('/api/temperatura', Temperatura.save)
+  app.post('/api/temperaturas', Temperatura.list)
+  
 
 };
