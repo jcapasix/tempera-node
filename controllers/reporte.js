@@ -23,6 +23,8 @@ exports.list = function(req, res) {
             var response = []
 
             for (i in cultivos){
+              alertas = 0
+              temperatura = 0
               for (j in reportes){
                 //console.log(cultivos[index].id)
                 if (cultivos[i].id == reportes[j].cultivo.id){
@@ -36,6 +38,8 @@ exports.list = function(req, res) {
               }
 
               response.push({"cultivo":cultivos[i], "alertas":alertas, "temperatura":temperatura})
+
+              
             }
             res.json({"success":true, "reportes":response});
           }
