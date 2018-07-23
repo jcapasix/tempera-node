@@ -57,29 +57,29 @@ function saveTemperatura(tempJson){
 
 
 //SERIAL COMUNICATION
-const SerialPort = require('serialport');
-const ReadLine = SerialPort.parsers.Readline;
+// const SerialPort = require('serialport');
+// const ReadLine = SerialPort.parsers.Readline;
 
-const port = new SerialPort("COM4", {
-    baudRate: 9600
-  });
+// const port = new SerialPort("COM4", {
+//     baudRate: 9600
+//   });
 
-  const parser = port.pipe(new ReadLine({ delimiter: '\r\n' }));
+//   const parser = port.pipe(new ReadLine({ delimiter: '\r\n' }));
 
-  parser.on('open', function () {
-    console.log('connection is opened');
-  });
+//   parser.on('open', function () {
+//     console.log('connection is opened');
+//   });
 
-  parser.on('data', function (data) {   
-    //let temp=parseInt(data, 10) + " C°";
-    console.log(temp);
-    var tempJson = {"temperatura":{"value":30}};
-	saveTemperatura(tempJson);
-  });
+//   parser.on('data', function (data) {   
+//     //let temp=parseInt(data, 10) + " C°";
+//     console.log(temp);
+//     var tempJson = {"temperatura":{"value":30}};
+// 	saveTemperatura(tempJson);
+//   });
 
-  parser.on('error', function (err) {   
-    console.log(err);   
-  });
-  port.on('error', function (err) {   
-    console.log(err);   
-  });
+//   parser.on('error', function (err) {   
+//     console.log(err);   
+//   });
+//   port.on('error', function (err) {   
+//     console.log(err);   
+//   });

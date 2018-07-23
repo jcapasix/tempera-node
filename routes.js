@@ -7,8 +7,8 @@ var Users = require('./controllers/users.js');
 var User = require('./models/user.js');
 
 var Temperatura = require('./controllers/temperatura.js');
-
 var Cultivos = require('./controllers/cultivos.js');
+var Reporte = require('./controllers/reporte.js');
 
 // 2. Authentication Middleware
 function ensureAuthenticated(req, res, next) {
@@ -55,6 +55,9 @@ module.exports = function (app) {
   app.post('/api/temp', Temperatura.temp)
   app.post('/api/temperatura', Temperatura.save)
   app.post('/api/temperaturas', Temperatura.list)
+
+  app.post('/api/reporte', Reporte.save)
+  app.post('/api/reportes', Reporte.list)
   
 
 };
